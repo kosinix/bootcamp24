@@ -1,0 +1,26 @@
+# create: sudo nano /etc/systemd/system/devtalk24.service
+# update systemd: sudo systemctl daemon-reload
+# restart: sudo systemctl restart devtalk24
+# status: sudo systemctl status devtalk24
+# start-on-boot: sudo systemctl enable devtalk24
+
+[Unit]
+Description=devtalk24
+
+# Requires this service to run first
+
+[Service]
+ExecStart=/usr/bin/node /home/ubuntu/devtalk24/index.js
+
+# Restart service after 10 seconds if node service crashes
+Restart=always
+RestartSec=10
+
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=devtalk24
+Environment=NODE_ENV=live PORT=9101
+
+[Install]
+WantedBy=multi-user.target
