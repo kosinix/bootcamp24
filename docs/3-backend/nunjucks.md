@@ -19,7 +19,7 @@ Lets try and use Nunjucks:
     npm install nunjucks
     ```
 
-1. Go ahead and check your `package.json`. You now have `nunjucks` together with `express` under dependencies. That means that your app now depends on `express` and `nunjucks` to work properly.
+1. Go ahead and check your `package.json`. You now have `nunjucks` together with `express` under dependencies. That means that your app now depends on Express and Nunjucks to work properly.
 
 ## Setting up Nunjucks
 Let's setup Nunjucks with Express.
@@ -40,13 +40,13 @@ Let's setup Nunjucks with Express.
     const app = express()
 
     // Setup templating engine
-    // Setup nunjucks loader. See https://mozilla.github.io/nunjucks/api.html#loader
+    // Setup Nunjucks loader. See https://mozilla.github.io/nunjucks/api.html#loader
     let loaderFsNunjucks = new nunjucks.FileSystemLoader(dirView, {
         "noCache": true
     })
-    // Setup nunjucks environment. See https://mozilla.github.io/nunjucks/api.html#environment
+    // Setup Nunjucks environment. See https://mozilla.github.io/nunjucks/api.html#environment
     let nunjucksEnv = new nunjucks.Environment(loaderFsNunjucks)
-    nunjucksEnv.express(app) // Hook up express and nunjucks
+    nunjucksEnv.express(app) // Hook up Express and Nunjucks
 
     // Static public files
     app.use(express.static(__dirname + '/data/public'));
@@ -60,14 +60,14 @@ Let's setup Nunjucks with Express.
     ```
 
 1. Stop anu running node app: `CTRL + C`
-1. Run your express app: `node index.js`
+1. Run your Express app: `node index.js`
 
-Voila it still looks the same in the frontend, but our template code is now managed by nunjucks!
+Voila it still looks the same in the frontend, but our template code is now managed by Nunjucks!
 
 
 ## Dissecting our index.js
 
-First we include the packages we need, express and nunjucks
+First we include the packages we need, Express and Nunjucks
 
 ```javascript
 // Required packages
@@ -86,7 +86,7 @@ const port = 3000
 ```
 
 
-Next we create express
+Next we create Express
 ```javascript
 const app = express()
 ```
@@ -102,8 +102,15 @@ let loaderFsNunjucks = new nunjucks.FileSystemLoader(dirView, {
 })
 let nunjucksEnv = new nunjucks.Environment(loaderFsNunjucks)
 ```
+:::info
+How did we know how to use the FileSystemLoader and Environment of Nunjucks?
 
-Next we hook up express and nunjucks
+By reading its documentation here: [https://mozilla.github.io/nunjucks/api.html#loader](https://mozilla.github.io/nunjucks/api.html#loader)
+
+In programming, **English language comprehension is vital**, as almost all programming languages and its documentation are written in English.
+:::
+
+Next we hook up Express and Nunjucks
 ```javascript
 nunjucksEnv.express(app)
 ```

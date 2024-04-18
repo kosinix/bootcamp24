@@ -24,30 +24,33 @@ See *Prerequisites*.
 1. Open the Visual Studio Code terminal in `Terminal > New Terminal`. Or use the shortcut `CTRL + (backtick)`
 
 ## Let's Begin!
-1. In the Visual Studio Code terminal run: `npm init`
+1. In the Visual Studio Code terminal run:
+    ```bash
+    npm init
+    ```
 1. Enter the following details:
 
-```bash
-    name: node-zero-to-hero
+    ```bash
+        name: node-zero-to-hero
 
-    version: 1.0.0
+        version: 1.0.0
 
-    description: 
+        description: 
 
-    entry point: index.js
+        entry point: index.js
 
-    test command: 
-    
-    repository: https://github.com/kosinix/node-zero-to-hero.git
+        test command: 
+        
+        repository: https://github.com/kosinix/node-zero-to-hero.git
 
-    keywords: 
+        keywords: 
 
-    author: 
+        author: 
 
-    license: MIT
-    
-    Is this Ok?    Just hit enter
-```
+        license: MIT
+        
+        Is this Ok?    Just hit enter
+    ```
 This will create a `package.json` file that contains info about this package:
 
 ```json
@@ -76,7 +79,10 @@ The package.json file is handled by NPM, avoid editing it manually.
 Express.js is a framework for creating web apps. We can write web apps without using Express but we would write a lot more code. 
 
 1. Start by installing Express.js. 
-1. We use the following command: `npm install express`
+1. We use the following command: 
+    ```bash
+    npm install express
+    ```
 1. This does 3 things:
 
     * Adds a `package-lock.json` file. This file is used by node to keep track of its dependencies.
@@ -92,8 +98,11 @@ Express.js is a framework for creating web apps. We can write web apps without u
 
 ## Creating An Entry-Point to Our Code
 
-1. Go to Visual Studio Code's Explorer panel. Click the New File icon. Type `index.js`
-1. In the terminal type: `node index.js`. Since index.js is empty it will do nothing and exit. Let's add some code to it.
+1. Go to Visual Studio Code's Explorer panel. 
+1. Click an empty space in the Explorer panel.
+1. Click the New File icon and type `index.js`
+1. In the terminal type: `node index.js`. Since index.js is empty it will do nothing and exit immediately. 
+    Let's add some code to it.
 1. Open `index.js` by clicking on it in the Explorer panel.
 1. Inside it, add the following code:
 
@@ -110,7 +119,8 @@ app.listen(port, () => {
 1. Now run again `node index.js`. 
 1. You should see the message `App running on http://localhost:3000`
 
-:::info[What is a Port?]
+:::info
+### What is a Port?
 ****
 
 Port numbers refer to specific endpoints through which applications communicate over a network. Ports are identified by 16-bit unsigned numbers, ranging from 0 to 65535.
@@ -154,10 +164,25 @@ Our app is now running, but it doesn't have any routes. Its basically useless. L
 1. You should be greeted with a message `Hello world!`.
 
 ### Parts of a Route
-* Path
-* Callback
-    * Request
-    * Response
+* Path: '/'
+* Callback: (req, res) => {}
+    * Request: req
+    * Response: res
+
+:::info
+### Commonly Used HTTP Methods
+****
+
+**GET**: Requests data from a specified resource. It retrieves data without modifying it, making it safe and idempotent.
+
+**POST**: Submits data to be processed to a specified resource. It is often used when submitting form data or uploading a file, and it can change the state of the server or create a new resource.
+
+**PUT**: Uploads a representation of the specified resource. It replaces the current representation of the target resource with the uploaded content. It is idempotent, meaning multiple identical PUT requests will have the same effect as a single request.
+
+**DELETE**: Deletes the specified resource. It removes the resource from the server. It is idempotent, meaning multiple identical DELETE requests will have the same effect as a single request.
+
+**PATCH**: Applies partial modifications to a resource. It is used to apply partial modifications to a resource, rather than replacing the entire resource. It is typically used to update resources.
+:::
 
 ## Sending HTML
 Lets try displaying an actual web page instead of just hello world. 

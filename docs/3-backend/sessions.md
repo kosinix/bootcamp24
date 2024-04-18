@@ -6,23 +6,27 @@ sidebar_position: 5
 
 By design, web apps doesn't have a way to remember you. It treats every visit to it as unique. In order to differentiate your request among others, we use sessions.
 
-:::info
-Sessions are used to maintain stateful information about a user's activities across multiple requests and responses between the client (typically a web browser) and the server.
-:::
+## What Are Sessions?
+Sessions are used to maintain **stateful information** about a user's activities across multiple requests and responses between the client (typically a web browser) and the server.
 
-The most common use of session, is to identify if a user is logged-in or not.
-
-A login is used to secure a portion of a web app. Meaning you can only view it if you are logged in.
+The most common use of session, is to identify if a user is logged-in or not. A login is used to secure a portion of a web app. Meaning you can only view it if you are logged in.
 
 ## Session Package
 
-To use sessions in express, install the session package.
+To use sessions in Express, install the Session package.
 
 1. Run this in the terminal:
 
+    :::tip
+    Press `CTRL + C` to stop the running app and be able to type again on the Terminal.
+    :::
     ```bash
     npm install express-session
     ```
+
+:::info
+The package.json file should now have `express`, `nunjucks`, and `session` under dependencies.
+:::
 
 1. Include the session module:
 
@@ -30,7 +34,7 @@ To use sessions in express, install the session package.
     const session = require('express-session')
     ```
 
-1. Next we register the session middleware. 
+1. Next we register the Session middleware. 
 
     Add the code below before the `app.use(express.static(__dirname + '/data/public'));` middleware:
 
@@ -41,7 +45,13 @@ To use sessions in express, install the session package.
         saveUninitialized: false
     }))
     ```
+:::info
+How did we know how to use Express Session?
 
+By reading its documentation here: [https://www.npmjs.com/package/express-session](https://www.npmjs.com/package/express-session)
+
+A Node module's documentation can be on its own web page (like Nunjucks), on its NPM directory page (like in this case) or on its Github repository. All packages can be found in the NPM directory website. 
+:::
 
 ## Protecting a Page Using Session
 
@@ -134,6 +144,10 @@ Restart the app. Now everytime you go to the Protected Page, you are redirected 
 
 :::tip
 These view files are in the `data/view` directory already. So everything just works.
+:::
+
+:::info
+Note the use of `res.redirect('/login')`. It is an Express function to redirect to a given URL, in this case to the `/login` URL of our web app.
 :::
 
 ## Congratulations!
