@@ -132,6 +132,12 @@ Error: Wrong password
 
 ## Sending Data To View
 
+By now we have been passing data from the browser to the server, and vice versa from the server to the browser.
+On the backend (server), data is received by the Node app, goes to the middlewares, and finally to the proper route. 
+The route will then process the data, create the HTML to be sent back to the browser using nunjucks. 
+Once its done, Node will send the data back to the browser.
+
+[![IMAGE ALT TEXT](/img/web-app-data-flow.png)](/img/web-app-data-flow.png)
 In order to send data back into our template views (the files used by our templating engine),
 we pass a second parameter into `res.render`:
 
@@ -208,7 +214,7 @@ By now you are probably tired of restarting the app every time you have made cha
 1. Now in the terminal type: 
 
     ```bash
-    npm run dev`
+    npm run dev
     ```
 
 This will start nodemon once, and everytime your app code changes, the app automatically restarts, saving you time.

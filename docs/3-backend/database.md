@@ -51,15 +51,11 @@ module.exports = {
             await sequelize.authenticate()
             console.log(`Database connected.`);
 
-            return sequelize
-        } catch (error) {
-            console.log('Connection error:', error.message)
-        }
-    },
-    attachModels: async (sequelize) => {
-        try {
-            return {
-                User: require('./models/user')('User', sequelize),
+            return  {
+                instance: sequelize,
+                models: {
+                    User: require('./models/user')('User', sequelize),
+                },
             }
         } catch (error) {
             console.log('Connection error:', error.message)
@@ -88,20 +84,18 @@ module.exports = (modelName, sequelize) => {
 }
 ```
 
-In the `index.js` include the db-connect file. Place it just below the `const port = 3000` line:
+In the `index.js` include the db-connect file. Place it just above the `// Constants` line:
+
 ```javascript
 // Modules
 const db = require('./data/src/db-connect')
 ```
-Next, initialize the database and save its references. Place it just below the `nunjucksEnv.express(app)` line:
+
+Next, initialize the database and save its reference. Place it just below the `nunjucksEnv.express(app)` line:
+
 ```javascript
 // Connect to db
-const dbInstance = await db.connect()
-const dbModels = await db.attachModels(dbInstance)
-app.locals.db = {
-    instance: dbInstance,
-    models: dbModels,
-}
+app.locals.db = await db.connect()
 ```
 
 Try running your web app. Did you get this error?
@@ -166,11 +160,11 @@ To fix this we will store are session in our app database.
 Back in `index.js`:
 
 1. Remove `const session = require('express-session')`
-1. After dbconnect add this line `const session = require('./data/src/session')`
+1. Under the line `// Use the session middleware`, add this line `const session = require('./data/src/session')`
 1. Replace :
 
     ```javascript
-        app.use(session({
+    app.use(session({
         secret: 'secret',
         resave: false,
         saveUninitialized: false
@@ -186,6 +180,12 @@ Back in `index.js`:
 1. Restart the web app.
 
 ## User Data
+
+Right now our user data is hard-coded in the login page and in the post login route.
+Lets go ahead and use our database to store our user data. 
+
+
+In preparation, lets create our password manager package first.
 
 1. Create `data/src/password-man.js`:
     ```javascript
@@ -205,7 +205,7 @@ Back in `index.js`:
     }
     ```
 
-1. Include it in `index.js` after the session package
+1. Include it in `index.js` after the line `const db = require('./data/src/db-connect')`
 
     ```javascript
     const passwordMan = require('./data/src/password-man')
@@ -318,7 +318,7 @@ Back in `index.js`:
 ## Where to go from here?
 :::tip
 
-**This bootcamp is only 4 days. There is 365 days in a year. Its what you do after that matters.**
+**This bootcamp is only 4 days. There are 365 days in a year. Its what you do after that matters.**
 
 **A teacher can only open the door, but the student has to walk through it.**
 
